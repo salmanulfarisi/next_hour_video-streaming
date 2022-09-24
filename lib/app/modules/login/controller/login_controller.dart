@@ -47,7 +47,7 @@ class LoginController extends GetxController {
       return;
     }
     loginFormKey.currentState!.save();
-    Get.offAllNamed(Routes.home);
+    Get.offAllNamed(Routes.dashboardPage);
     getStorage.write('id', 1);
     getStorage.write("name", emailController.text);
   }

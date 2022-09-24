@@ -66,7 +66,7 @@ class SignupController extends GetxController {
       return;
     }
     signupFormKey.currentState!.save();
-    Get.toNamed(Routes.home);
+    Get.toNamed(Routes.dashboardPage);
     getStorage.write("key", 1);
   }
 }

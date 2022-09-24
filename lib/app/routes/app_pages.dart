@@ -1,4 +1,6 @@
 import 'package:get/get.dart';
+import 'package:next_hour/app/modules/dashboard/binding/dashboard_bindings.dart';
+import 'package:next_hour/app/modules/dashboard/view/dashboard_view.dart';
 import 'package:next_hour/app/modules/forgetpage/bindings/forgetpage_binding.dart';
 import 'package:next_hour/app/modules/forgetpage/view/forgetpage.dart';
 import 'package:next_hour/app/modules/home/bindings/home_binding.dart';
@@ -40,6 +42,14 @@ class AppPages {
         page: () => const SignUpView(),
         binding: SignupBinding()),
     GetPage(
-        name: Paths.home, page: () => const HomeView(), binding: HomeBinding())
+      name: Paths.home,
+      page: () => const HomeView(),
+      binding: HomeBinding(),
+    ),
+    GetPage(
+      name: Paths.dashboardpage,
+      page: () => const DashboardView(),
+      binding: DashboardBindings(),
+    )
   ];
 }

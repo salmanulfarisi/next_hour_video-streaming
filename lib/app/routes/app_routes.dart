@@ -6,6 +6,7 @@ abstract class Routes {
   static const signUp = Paths.signup;
   static const home = Paths.home;
   static const forgetPage = Paths.forgetPass;
+  static const dashboardPage = Paths.dashboardpage;
 }
 
 abstract class Paths {
@@ -16,4 +17,5 @@ abstract class Paths {
   static const signup = '/signup';
   static const home = '/home';
   static const forgetPass = '/forgetpass';
+  static const dashboardpage = '/dashboardpage';
 }
