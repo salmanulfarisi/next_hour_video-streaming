@@ -1,19 +1,13 @@
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
 import 'package:next_hour/app/routes/app_routes.dart';
 
 class HomeController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    name = getstorage.read('name');
-  }
-
-  final getstorage = GetStorage();
+  // final getstorage = GetStorage();
   var name = '';
 
   logout() {
-    getstorage.erase();
+    // getstorage.erase();
     Get.offAllNamed(Routes.splash);
   }
 }

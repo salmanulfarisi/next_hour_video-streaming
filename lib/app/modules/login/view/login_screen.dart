@@ -64,6 +64,7 @@ class LoginPage extends GetView<LoginController> {
                   () => TextFormField(
                     obscureText: controller.isPasswordHidden.value,
                     keyboardType: TextInputType.visiblePassword,
+                    autofillHints: const [AutofillHints.email],
                     controller: controller.passwordController,
                     onSaved: (value) {
                       controller.password = value!;

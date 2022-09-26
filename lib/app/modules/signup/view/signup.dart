@@ -139,7 +139,7 @@ class SignUpView extends GetView<SignupController> {
                 ButtonWidgets(
                   text: 'Sign Up',
                   onPressed: () {
-                    controller.checkLogin();
+                    controller.checkSignUp();
                   },
                 ),
                 const OrWidget(),

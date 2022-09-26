@@ -1,12 +1,16 @@
 import 'package:flutter/cupertino.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+// import 'package:get_storage/get_storage.dart';
+import 'package:next_hour/app/data/models/signup_model.dart/signup_model.dart';
+import 'package:next_hour/app/modules/signup/controller/service/api_service.dart';
 import 'package:next_hour/app/routes/app_routes.dart';
 
 class SignupController extends GetxController {
-  final getStorage = GetStorage();
+  // final getStorage = GetStorage();
   var isPasswordHidden = true.obs;
   var ckeckBool = false.obs;
+  var isAPIcallProcess = false.obs;
   final GlobalKey<FormState> signupFormKey = GlobalKey<FormState>();
   late TextEditingController emailController,
       passwordController,
@@ -60,13 +64,41 @@ class SignupController extends GetxController {
   //   return false;
   // }
 
-  void checkLogin() {
-    final isValid = signupFormKey.currentState!.validate();
-    if (!isValid) {
-      return;
+  // void checkLogin() {
+  //   final isValid = signupFormKey.currentState!.validate();
+  //   if (!isValid) {
+  //     return;
+  //   }
+  //   signupFormKey.currentState!.save();
+  //   Get.toNamed(Routes.dashboardPage);
+  //   getStorage.write("key", 1);
+  // }
+
+  bool validateAndSave() {
+    final form = signupFormKey.currentState;
+    if (form!.validate()) {
+      form.save();
+      return true;
+    } else {
+      return false;
     }
-    signupFormKey.currentState!.save();
-    Get.toNamed(Routes.dashboardPage);
-    getStorage.write("key", 1);
+  }
+
+  checkSignUp() {
+    if (validateAndSave()) {
+      isAPIcallProcess.value = true;
+      SignupModel model = SignupModel(
+        email: email,
+        password: password,
+      );
+      SignupApiService.signUp(model).then((response) {
+        if (response.user != null) {
+          Fluttertoast.showToast(msg: "Successfully Registerd");
+          Get.offAllNamed(Routes.home);
+        } else {
+          Fluttertoast.showToast(msg: 'error');
+        }
+      });
+    }
   }
 }
