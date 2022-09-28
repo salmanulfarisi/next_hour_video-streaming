@@ -124,7 +124,7 @@ class LoginPage extends GetView<LoginController> {
                 ButtonWidgets(
                   text: 'Sign In',
                   onPressed: () {
-                    controller.checkLogin();
+                    controller.callLoginApi();
                   },
                 ),
                 const OrWidget(),

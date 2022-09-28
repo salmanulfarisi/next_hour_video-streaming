@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 // import 'package:get_storage/get_storage.dart';
 import 'package:next_hour/app/data/models/login_models/login_model.dart';
+import 'package:next_hour/app/data/models/login_models/login_response.dart';
 import 'package:next_hour/app/modules/login/controller/service/api_service.dart';
 import 'package:next_hour/app/routes/app_routes.dart';
 
@@ -64,52 +68,51 @@ class LoginController extends GetxController {
     }
   }
 
-  checkLogin() {
-    if (validateAndSave()) {
-      isAPIcallProcess.value = true;
-      LoginModel model = LoginModel(
-        email: emailController.text,
-        password: passwordController.text,
-      );
-      LoginApiService.login(model).then((response) {
-        if (response) {
-          print(response);
-          Get.offAllNamed(Routes.dashboardPage);
-        } else {
-          Get.snackbar("Error", 'Something Went Wrong');
-        }
-      });
-      // LoginApiService.login(model).then((response) {
-      //   if (response) {
-      //     print('$response.jai');
-      //     Get.offAllNamed(Routes.home);
-      //   } else {
-      //     Get.snackbar("Error", "Invalid Username/Password !",
-      //         snackPosition: SnackPosition.TOP);
-      //   }
-      // });
+  // checkLogin() {
+  //   if (validateAndSave()) {
+  //     isAPIcallProcess.value = true;
+  //     LoginModel model = LoginModel(
+  //       email: emailController.text,
+  //       password: passwordController.text,
+  //     );
+  //     LoginApiService.login(model).then((response) {
+  //       if (response) {
+  //         print(response);
+  //         Get.offAllNamed(Routes.dashboardPage);
+  //       } else {
+  //         Get.snackbar("Error", 'Something Went Wrong');
+  //       }
+  //     });
+  //     // LoginApiService.login(model).then((response) {
+  //     //   if (response) {
+  //     //     print('$response.jai');
+  //     //     Get.offAllNamed(Routes.home);
+  //     //   } else {
+  //     //     Get.snackbar("Error", "Invalid Username/Password !",
+  //     //         snackPosition: SnackPosition.TOP);
+  //     //   }
+  //     // });
+  //   }
+  // }
+
+  callLoginApi() async {
+    final data = LoginModel(
+        email: emailController.text, password: passwordController.text);
+    LoginResponse? response = await API().loginUser(data);
+    if (response != null) {
+      log(response.user!.email.toString());
+      if (response.success!) {
+        storedataLogin(response);
+        Get.offAllNamed(Routes.home);
+      } else {
+        print(response.user.toString());
+      }
     }
   }
 
-//   callLoginApi() async {
-//     final data = LoginModel(
-//         email: emailController.text, password: passwordController.text);
-//     LoginResponse? response = await API().loginUser(data);
-//     if (response != null) {
-//       log(response.success.toString());
-//       if (response.success!) {
-//         storedataLogin(response);
-//         Get.offAllNamed(Routes.home);
-//       } else {
-//         print(response.success.toString());
-//       }
-//     }
-//   }
-
-//   FlutterSecureStorage storage = const FlutterSecureStorage();
-//   storedataLogin(LoginResponse response) async {
-//     await storage.write(key: 'token', value: response.token);
-//     await storage.write(key: 'user', value: response.user!.email.address);
-//   }
-// }
+  FlutterSecureStorage storage = const FlutterSecureStorage();
+  storedataLogin(LoginResponse response) async {
+    await storage.write(key: 'token', value: response.token);
+    await storage.write(key: 'user', value: response.user!.email.address);
+  }
 }
