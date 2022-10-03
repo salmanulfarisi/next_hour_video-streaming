@@ -57,23 +57,48 @@ class OnbBoardingView extends GetView<OnboardingController> {
                       spacing: 10),
                 ),
                 size50,
-                Padding(
-                  padding: const EdgeInsets.all(24.0),
-                  child: SizedBox(
-                    width: double.infinity,
-                    height: 50,
-                    child: ElevatedButton(
-                        onPressed: () {
-                          controller.forwardAction();
-                        },
-                        style: elevatedButtonStyle,
-                        child: Obx(() {
-                          return Text(
-                            controller.isLastpage ? 'Continue' : 'Next',
-                            style: buttonTextStyle,
-                          );
-                        })),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              // Get.to(() => const LoginPage());
+                            },
+                            style: elevatedButtonStyle,
+                            child: const FittedBox(
+                              child: Text(
+                                'skip',
+                                style: buttonTextStyle,
+                              ),
+                            )),
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(24.0),
+                      child: SizedBox(
+                        width: 100,
+                        height: 50,
+                        child: ElevatedButton(
+                            onPressed: () {
+                              controller.forwardAction();
+                            },
+                            style: elevatedButtonStyle,
+                            child: Obx(() {
+                              return FittedBox(
+                                child: Text(
+                                  controller.isLastpage ? 'Continue' : 'Next',
+                                  style: buttonTextStyle,
+                                ),
+                              );
+                            })),
+                      ),
+                    ),
+                  ],
                 )
               ],
             )

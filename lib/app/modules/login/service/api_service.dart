@@ -16,18 +16,13 @@ class API {
       final re = await checkIn();
       if (re) {
         Response response = await dio.post(Config.login, data: model.toJson());
+        print(response.statusCode);
         if (response.statusCode == 200) {
           debugPrint(response.statusCode.toString());
           Fluttertoast.showToast(msg: 'Successfully Login');
           return LoginResponse.fromJson(response.data);
-        } else if (response.statusCode == 401) {
-          Fluttertoast.showToast(msg: 'Bed CREADINTEIL');
-        } else if (response.statusCode == 409) {
-          Fluttertoast.showToast(msg: 'Already have an account in this mail');
-        } else if (response.statusCode == 400) {
-          Fluttertoast.showToast(msg: 'validation error');
         } else {
-          return null;
+          return LoginResponse.fromJson(response.data);
         }
       }
     } on TimeoutException catch (e) {
@@ -36,14 +31,16 @@ class API {
       debugPrint(e.toString());
     } catch (e) {
       if (e is DioError) {
-        if (e.response?.data == null) {
-          return LoginResponse(success: true);
+        print(e.response?.statusCode);
+        if (e.response?.statusCode == 401) {
+          Fluttertoast.showToast(msg: e.response!.data['message'].toString());
+        } else {
+          return null;
         }
-        return LoginResponse.fromJson(e.response!.data);
-      } else {
-        return LoginResponse(success: true);
       }
+      return null;
     }
+
     return null;
   }
 
@@ -57,7 +54,6 @@ class API {
     return result;
   }
 }
-
 // import 'package:flutter/material.dart';
 // import 'package:http/http.dart' as http;
 // import 'package:next_hour/app/data/models/login_models/login_model.dart';
@@ -87,3 +83,4 @@ class API {
 //     }
 //   }
 // }
+

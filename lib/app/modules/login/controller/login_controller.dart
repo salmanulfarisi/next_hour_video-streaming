@@ -6,7 +6,7 @@ import 'package:get/get.dart';
 // import 'package:get_storage/get_storage.dart';
 import 'package:next_hour/app/data/models/login_models/login_model.dart';
 import 'package:next_hour/app/data/models/login_models/login_response.dart';
-import 'package:next_hour/app/modules/login/controller/service/api_service.dart';
+import 'package:next_hour/app/modules/login/service/api_service.dart';
 import 'package:next_hour/app/routes/app_routes.dart';
 
 class LoginController extends GetxController {

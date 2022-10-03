@@ -32,7 +32,7 @@ class SignUpView extends GetView<SignupController> {
                   height: 200,
                 ),
                 const Text(
-                  'Craete your Account',
+                  'Create your Account',
                   textAlign: TextAlign.center,
                   style: textStyle,
                 ),
@@ -139,7 +139,7 @@ class SignUpView extends GetView<SignupController> {
                 ButtonWidgets(
                   text: 'Sign Up',
                   onPressed: () {
-                    controller.checkSignUp();
+                    controller.callSignupApi();
                   },
                 ),
                 const OrWidget(),
