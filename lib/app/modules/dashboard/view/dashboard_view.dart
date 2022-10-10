@@ -4,9 +4,9 @@ import 'package:get/get.dart';
 import 'package:next_hour/app/modules/add/view/shorts_view.dart';
 import 'package:next_hour/app/modules/dashboard/controller/dashboard_controller.dart';
 import 'package:next_hour/app/modules/home/view/home.dart';
-import 'package:next_hour/app/modules/library/view/shorts_view.dart';
+import 'package:next_hour/app/modules/library/view/view.dart';
 import 'package:next_hour/app/modules/shorts/view/shorts_view.dart';
-import 'package:next_hour/app/modules/subscriptions/view/shorts_view.dart';
+import 'package:next_hour/app/modules/subscriptions/view/view.dart';
 import 'package:next_hour/app/modules/utilities/themes/colors.dart';
 
 class DashboardView extends GetView<DashboardController> {
@@ -21,10 +21,13 @@ class DashboardView extends GetView<DashboardController> {
           index: controller.tabIndex,
           children: const [
             HomeView(),
-            ShortsView(),
+            ShortPage(),
+            // ShortsView(
+            //   index: 0,
+            // ),
             AddPageView(),
-            Subscriptions(),
-            LibraryView()
+            SubscriptionsPage(),
+            LibraryPage()
           ],
         )),
         bottomNavigationBar: BottomNavigationBar(

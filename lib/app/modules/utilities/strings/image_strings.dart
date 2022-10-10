@@ -1,4 +1,6 @@
 // -- Onboarding Images--
+import 'package:flutter/material.dart';
+
 const String onboardigImage1 =
     'assets/undraw_Welcome_re_h3d9-removebg-preview.png';
 const String onboardigImage2 =
@@ -20,3 +22,18 @@ String eagleThumnail =
 String eagleTitle = 'HAPPY SUNDAY - EAGLE GAMING';
 String eagelAvatar =
     'https://yt3.ggpht.com/ytc/AMLnZu8jh2DjW66SlYILQuc5Jb1iybqIVRmysB8z_QGufg=s176-c-k-c0x00ffffff-no-rj';
+String ema =
+    'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcHTGPAFCmNAZtUyVW8XVXe80xXac5soV3rg&usqp=CAU';
+// --- video string ----
+final dummyVideoUrls = [
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ElephantsDream.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+  "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4"
+];
+
+const imageAppentUrl = "https://image.tmdb.org/t/p/w500";
+
+ValueNotifier<Set<int>> likedVideosNotifier = ValueNotifier({});
+ValueNotifier<Set<int>> addedMyListNotifier = ValueNotifier({});

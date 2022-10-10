@@ -3,9 +3,12 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:get/get.dart';
 import 'package:next_hour/app/data/models/signup_model.dart/signup_model.dart';
 import 'package:next_hour/app/data/models/signup_model.dart/signup_response_model.dart';
+import 'package:next_hour/app/modules/login/view/login_screen.dart';
 import 'package:next_hour/app/modules/signup/service/dioservices.dart';
 import 'package:next_hour/app/modules/utilities/functions.dart';
 import 'package:next_hour/app/modules/utilities/strings/config.dart';
@@ -19,8 +22,17 @@ class SignupService {
         final response = await DioServies.postFunction(
             url: Config.register, value: model.toJson());
         if (response.statusCode! >= 200 && response.statusCode! <= 299) {
+          Get.defaultDialog(
+              title: 'created succesfully',
+              content: const Text('Go to login'),
+              onConfirm: () {
+                Get.to(() => const LoginPage());
+              },
+              onCancel: () {
+                Get.back();
+              });
           log(response.data['message']);
-          return SignupResponseModel.fromJson(model.toJson());
+          return SignupResponseModel.fromJson(response.data);
         } else {
           return SignupResponseModel.fromJson(model.toJson());
         }
@@ -43,7 +55,6 @@ class SignupService {
       }
     } else {
       log('internet error');
-      return SignupResponseModel.fromJson(model.toJson());
     }
     return null;
   }

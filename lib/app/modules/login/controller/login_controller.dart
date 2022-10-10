@@ -103,7 +103,7 @@ class LoginController extends GetxController {
       log(response.user!.email.toString());
       if (response.success!) {
         storedataLogin(response);
-        Get.offAllNamed(Routes.home);
+        Get.offAllNamed(Routes.dashboardPage);
       } else {
         print(response.user.toString());
       }
